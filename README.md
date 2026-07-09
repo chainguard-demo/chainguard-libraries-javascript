@@ -65,5 +65,5 @@ instead, see [Repository managers](tools/README.md#repository-managers) and the
 * [Chainguard Libraries for JavaScript — global configuration](https://edu.chainguard.dev/chainguard/libraries/javascript/global-configuration/)
 * [Chainguard Libraries for JavaScript — build configuration](https://edu.chainguard.dev/chainguard/libraries/javascript/build-configuration/) — the "Minimal example project" sections each `demo.sh` implements
 * [Chainguard learning labs with more demos](https://edu.chainguard.dev/software-security/learning-labs/)
-* [Chainguard Libraries for Java examples](https://github.com/mosabua/chainguard-libraries-java)
-* [Chainguard Libraries for Python examples](https://github.com/mosabua/chainguard-libraries-python)
+* [Chainguard Libraries for Java examples](https://github.com/chainguard-demo/chainguard-libraries-java)
+* [Chainguard Libraries for Python examples](https://github.com/chainguard-demo/chainguard-libraries-python)
