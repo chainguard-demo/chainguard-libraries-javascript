@@ -31,5 +31,5 @@ pnpm config set //libraries.cgr.dev/:_password "${password}" --location=project
 echo "Configured pnpm registry and auth"
 
 # Swap in any dependency you want to test, then re-run this script.
-pnpm add commander@4.1.1 picocolors@1.1.1
+pnpm add commander@4.1.1 picocolors@1.1.1 d3@7.9.0
 pnpm list

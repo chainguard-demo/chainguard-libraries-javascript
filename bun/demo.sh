@@ -28,5 +28,5 @@ EOF
 echo "Configured Bun registry and auth in bunfig.toml"
 
 # Swap in any dependency you want to test, then re-run this script.
-bun add commander@4.1.1 picocolors@1.1.1
+bun add commander@4.1.1 picocolors@1.1.1 d3@7.9.0
 bun pm ls

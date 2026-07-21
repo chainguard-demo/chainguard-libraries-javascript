@@ -39,5 +39,5 @@ yarn config set 'npmRegistries["//libraries.cgr.dev/javascript-upstream/"].npmAl
 echo "Configured Yarn registry and auth"
 
 # Swap in any dependency you want to test, then re-run this script.
-yarn add commander@4.1.1 picocolors@1.1.1
+yarn add commander@4.1.1 picocolors@1.1.1 d3@7.9.0
 yarn info --all --name-only || yarn info
