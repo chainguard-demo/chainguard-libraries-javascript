@@ -15,11 +15,17 @@ yarn init -y >/dev/null
 
 # Yarn Classic's own `yarn config` does not handle auth reliably; write a
 # project .npmrc instead. Auth is a base64-encoded identity:token in _auth.
+# Yarn Classic only applies _auth whose key matches the registry path, so a
+# host-level (path-less) key is ignored — configure both the /javascript/
+# registry and the /javascript-upstream/ path that the registry redirects to
+# for packages that are not mirrored yet.
 token=$(printf '%s' "${CHAINGUARD_JAVASCRIPT_IDENTITY_ID}:${CHAINGUARD_JAVASCRIPT_TOKEN}" | base64 | tr -d '\n')
 cat > .npmrc <<EOF
 registry=https://libraries.cgr.dev/javascript/
 //libraries.cgr.dev/javascript/:_auth="${token}"
 //libraries.cgr.dev/javascript/:always-auth=true
+//libraries.cgr.dev/javascript-upstream/:_auth="${token}"
+//libraries.cgr.dev/javascript-upstream/:always-auth=true
 EOF
 
 # Alternative: through a Nexus repository manager. Set the registry in .npmrc to

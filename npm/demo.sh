@@ -15,9 +15,11 @@ npm init -y >/dev/null
 # Registry — note the trailing slash.
 npm config set registry https://libraries.cgr.dev/javascript/ --location=project
 
-# Auth: base64-encoded identity:token in _auth.
+# Auth: base64-encoded identity:token in _auth. Scope it to the whole host (not
+# just /javascript/) so it also covers the /javascript-upstream/ path that the
+# registry redirects to for packages that are not mirrored yet.
 token=$(printf '%s' "${CHAINGUARD_JAVASCRIPT_IDENTITY_ID}:${CHAINGUARD_JAVASCRIPT_TOKEN}" | base64 | tr -d '\n')
-npm config set //libraries.cgr.dev/javascript/:_auth "${token}" --location=project
+npm config set //libraries.cgr.dev/:_auth "${token}" --location=project
 
 # Alternative: through a Nexus repository manager. Point the registry at your
 # Nexus npm repository and authenticate with your Nexus credentials instead of

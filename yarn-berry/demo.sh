@@ -19,11 +19,16 @@ yarn set version stable
 echo "Using yarn version $(yarn --version)"
 yarn init -y >/dev/null
 
-# Registry and auth (npmAuthIdent = identity:token).
+# Registry and auth (npmAuthIdent = identity:token). Yarn Berry matches
+# npmRegistries keys exactly against the registry URL, so configure both the
+# /javascript/ registry and the /javascript-upstream/ path that the registry
+# redirects to for packages that are not mirrored yet.
 authInfo="${CHAINGUARD_JAVASCRIPT_IDENTITY_ID}:${CHAINGUARD_JAVASCRIPT_TOKEN}"
 yarn config set npmRegistryServer https://libraries.cgr.dev/javascript/
 yarn config set 'npmRegistries["//libraries.cgr.dev/javascript/"].npmAuthIdent' "${authInfo}"
 yarn config set 'npmRegistries["//libraries.cgr.dev/javascript/"].npmAlwaysAuth' true
+yarn config set 'npmRegistries["//libraries.cgr.dev/javascript-upstream/"].npmAuthIdent' "${authInfo}"
+yarn config set 'npmRegistries["//libraries.cgr.dev/javascript-upstream/"].npmAlwaysAuth' true
 
 # Alternative: through a Nexus repository manager. Point npmRegistryServer at
 # your Nexus npm repository and authenticate with your Nexus credentials instead

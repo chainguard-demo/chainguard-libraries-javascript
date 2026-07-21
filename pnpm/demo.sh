@@ -15,9 +15,13 @@ pnpm init >/dev/null
 # Registry — note the trailing slash.
 pnpm config set registry https://libraries.cgr.dev/javascript/ --location=project
 
-# Auth: username / password.
-pnpm config set //libraries.cgr.dev/javascript/:username "${CHAINGUARD_JAVASCRIPT_IDENTITY_ID}" --location=project
-pnpm config set //libraries.cgr.dev/javascript/:_password "${CHAINGUARD_JAVASCRIPT_TOKEN}" --location=project
+# Auth: username / password. pnpm treats _password as base64-encoded, so the
+# token must be encoded before it is stored. Scope the auth to the whole host
+# (not just /javascript/) so it also covers the /javascript-upstream/ path that
+# the registry redirects to for packages that are not mirrored yet.
+password=$(printf '%s' "${CHAINGUARD_JAVASCRIPT_TOKEN}" | base64 | tr -d '\n')
+pnpm config set //libraries.cgr.dev/:username "${CHAINGUARD_JAVASCRIPT_IDENTITY_ID}" --location=project
+pnpm config set //libraries.cgr.dev/:_password "${password}" --location=project
 
 # Alternative: through a Nexus repository manager. Point the registry at your
 # Nexus npm repository and authenticate with your Nexus credentials instead of
