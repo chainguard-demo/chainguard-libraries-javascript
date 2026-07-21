@@ -31,31 +31,29 @@ Evaluate the output directly to export both variables into the current shell:
 eval "$(chainctl auth pull-token --output env --repository=javascript)"
 ```
 
-Create pull token for access to JavaScript libraries for the chainguard.edu
-organization, output environment variable commands, and pipe commands into a
-shell script. Change the parent parameter to your organization name.
+Write the export commands to a script to source later:
 
 ```shell
-chainctl auth pull-token --output env --repository=javascript --parent=chainguard.edu > javascript-access.sh
-```
-
-Load the environment variables for use in a terminal.
-
-```shell
+chainctl auth pull-token --output env --repository=javascript > javascript-access.sh
 source javascript-access.sh
 ```
 
-Create new pull token for access to JavaScript libraries and set environment
-variables:
+If you are a member of multiple organizations the preceding example commands
+must use the `--parent` parameter with the name of your organization:
 
 ```shell
-eval $(chainctl auth pull-token --output env --repository=javascript --parent=chainguard.edu)
+eval "$(chainctl auth pull-token --output env --parent=chainguard.edu --repository=javascript)"
+```
+
+```shell
+chainctl auth pull-token --output env --repository=javascript --parent=chainguard.edu > javascript-access.sh
 ```
 
 Create a policy with a 10-day cooldown and use it for JavaScript:
 
 ```shell
 chainctl libraries policy create --name=cooldown-10 --cooldown-days=10
+chainctl libraries policy describe cooldown-10
 chainctl libraries policy enable --policy=cooldown-10 --ecosystem=JAVASCRIPT --mode=ENFORCE
 ```
 
