@@ -18,6 +18,7 @@ for a real project.
 |---|---|
 | [`tools`](tools/README.md) | Shared access setup — `chainctl` commands and authentication, the same for every package manager |
 | [`npm`](npm/README.md) | npm |
+| [`npm-existing-project`](npm-existing-project/README.md) | npm — migrating a project that already has a `package-lock.json` |
 | [`pnpm`](pnpm/README.md) | pnpm — plus a [CVE remediation demo](pnpm/cve-remediation/README.md) that scans with Grype |
 | [`yarn-berry`](yarn-berry/README.md) | Yarn Berry (v4+) |
 | [`yarn-classic`](yarn-classic/README.md) | Yarn Classic (v1) |
