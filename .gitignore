@@ -1,6 +1,9 @@
 # Scratch directories created by the per-tool test.sh scripts
 work/
 
+# Downloaded SBOMs and attestations
+attestations/
+
 # Node / JavaScript
 node_modules/
 npm-debug.log*

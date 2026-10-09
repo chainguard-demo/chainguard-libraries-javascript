@@ -1,7 +1,8 @@
 # Example commands for Chainguard Libraries access
 
 These `chainctl` commands set up and manage access to Chainguard Libraries for
-JavaScript. They are the same across package managers.
+JavaScript. They are the same across package managers. The verify command also
+checks local artifacts and saves their SBOMs and attestations.
 
 List entitlements:
 
@@ -68,3 +69,45 @@ List policy bindings to ecosystems:
 ```shell
 chainctl libraries policy bindings list
 ```
+
+## Verify artifacts and download attestations
+
+`chainctl libraries verify` reports which packages were built from source by
+Chainguard. It uses your `chainctl auth login` session rather than the pull-token
+environment variables used by the package managers.
+
+Verify a downloaded npm tarball and save its available companions:
+
+```shell
+chainctl libraries verify lodash-4.17.21.tgz \
+  --output-attestations --output-dir attestations
+```
+
+For this package, files are saved under `attestations/lodash/4.17.21/`:
+
+- `lodash-provenance-4.17.21.sigstore` — the exact signed SLSA provenance bundle
+  used to verify the package.
+- `lodash-sbom-4.17.21.spdx.json` — the SPDX SBOM from the authenticated
+  Chainguard endpoint. It is trusted based on that endpoint; its bytes are not
+  cryptographically bound by the npm provenance.
+
+Scoped packages use `attestations/@scope/name/version/`, with the unscoped name
+in the file names. Only verified Chainguard builds produce companion files.
+Missing SBOMs are skipped.
+
+You can also save companions for dependencies in a supported lockfile. From the
+repository root after running the npm demo:
+
+```shell
+chainctl libraries verify npm/work/package-lock.json \
+  --output-attestations --output-dir attestations
+```
+
+Lockfile downloads require verified provenance bound to the package the entry
+will install. Ambiguous entries with multiple integrity hashes are skipped
+unless their resolved URL identifies the Chainguard build. Installed
+`node_modules` directories, npm caches, pnpm stores, and Yarn Classic caches also
+support downloads.
+
+See the [Chainguard Academy verification guide](https://edu.chainguard.dev/chainguard/libraries/policies-and-security/verification/#download-javascript-sboms-and-attestations)
+for more details.
