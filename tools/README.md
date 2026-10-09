@@ -23,7 +23,7 @@ docs:
 
 | Resource | Purpose |
 |---|---|
-| [`access-examples.md`](access-examples.md) | `chainctl` command examples — entitlements, pull tokens, and policies. Start here to set up credentials. |
+| [`access-examples.md`](access-examples.md) | `chainctl` command examples — entitlements, pull tokens, policies, and artifact verification. Start here to set up credentials. |
 
 ## Authentication
 
@@ -38,6 +38,25 @@ This sets `CHAINGUARD_JAVASCRIPT_IDENTITY_ID` and `CHAINGUARD_JAVASCRIPT_TOKEN`,
 which the per-tool registry configuration reads. See
 [`access-examples.md`](access-examples.md) for the full set of `chainctl`
 commands, including entitlements, organization-scoped tokens, and policies.
+
+## Verify artifacts
+
+After running the npm demo, verify its lockfile and save available SBOMs and
+provenance with `chainctl libraries verify`. Run this command from the repository
+root:
+
+```bash
+chainctl libraries verify npm/work/package-lock.json \
+  --output-attestations --output-dir attestations
+```
+
+Verification uses your `chainctl auth login` session rather than the pull-token
+environment variables. Files for verified Chainguard builds are saved under
+`attestations/name/version/`, including the scope for scoped packages. The
+`attestations/` directory is git-ignored.
+
+For tarball examples, file names, and trust details, see
+[Verify artifacts and download attestations](access-examples.md#verify-artifacts-and-download-attestations).
 
 ## Registry
 
