@@ -43,3 +43,10 @@ To test a different package, edit the `pnpm add` line near the end of
 `demo.sh` and run it again. Each run wipes and recreates `work/`, so you always
 start from a clean project — a fast loop for confirming that any given
 dependency resolves through Chainguard Libraries.
+
+## CVE remediation demo
+
+The [`cve-remediation`](cve-remediation/README.md) subfolder builds on this same
+pnpm setup to show vulnerability remediation: it installs a plain vulnerable
+build and the backported `-cgr.N` build, then scans both with Grype to confirm
+the remediated build clears the High-severity CVEs.
