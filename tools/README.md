@@ -46,8 +46,7 @@ provenance with `chainctl libraries verify`. Run this command from the repositor
 root:
 
 ```bash
-chainctl libraries verify npm/work/package-lock.json \
-  --output-attestations --output-dir attestations
+chainctl libraries verify npm/work/package-lock.json --output-attestations
 ```
 
 Verification uses your `chainctl auth login` session rather than the pull-token

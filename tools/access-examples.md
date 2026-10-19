@@ -79,8 +79,7 @@ environment variables used by the package managers.
 Verify a downloaded npm tarball and save its available companions:
 
 ```shell
-chainctl libraries verify lodash-4.17.21.tgz \
-  --output-attestations --output-dir attestations
+chainctl libraries verify lodash-4.17.21.tgz --output-attestations
 ```
 
 For this package, files are saved under `attestations/lodash/4.17.21/`:
@@ -99,8 +98,7 @@ You can also save companions for dependencies in a supported lockfile. From the
 repository root after running the npm demo:
 
 ```shell
-chainctl libraries verify npm/work/package-lock.json \
-  --output-attestations --output-dir attestations
+chainctl libraries verify npm/work/package-lock.json --output-attestations
 ```
 
 Lockfile downloads require verified provenance bound to the package the entry
